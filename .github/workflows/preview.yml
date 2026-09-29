@@ -1,0 +1,31 @@
+name: Gerar preview público
+
+on:
+  push:
+    paths:
+      - '.preview/READY*'
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar dependências
+        run: npm install
+      - name: Compilar com caminhos relativos
+        run: npm run build -- --base=./
+      - name: Publicar dist no repositório
+        run: |
+          git config user.name "GerenteMax Publisher"
+          git config user.email "suporte@gerentemax.com"
+          git add -f dist
+          git commit -m "Gera preview público do GerenteMax v36" || exit 0
+          git push
