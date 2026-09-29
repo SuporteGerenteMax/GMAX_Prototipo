@@ -1,0 +1,15 @@
+name: Diagnose bootstrap chunks
+
+on:
+  push:
+    paths:
+      - '.bootstrap/HASH'
+
+jobs:
+  hash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Hash chunks
+        run: |
+          sha256sum .bootstrap/cp_*
