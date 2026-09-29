@@ -3,7 +3,7 @@ name: Diagnose bootstrap chunks
 on:
   push:
     paths:
-      - '.bootstrap/HASH'
+      - '.bootstrap/HASH*'
 
 jobs:
   hash:
