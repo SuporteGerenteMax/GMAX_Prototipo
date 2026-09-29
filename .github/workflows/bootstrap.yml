@@ -3,7 +3,7 @@ name: Expand GerenteMax source
 on:
   push:
     paths:
-      - '.bootstrap/READY'
+      - '.bootstrap/READY*'
 
 permissions:
   contents: write
